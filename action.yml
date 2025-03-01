@@ -15,12 +15,16 @@ inputs:
   google_drive_folder_id:
     description: ID of the Google Drive folder to be exported.
     required: true
+  google_drive_query:
+    description: An optional where clause to filter the files from Google drive.
+    required: false
 runs:
   using: composite
   steps:
-    - uses: r7kamura/google-docs-to-markdown@v0
+    - uses: mcleanra/google-docs-to-markdown@v0
       with:
         google_drive_folder_id: ${{ inputs.google_drive_folder_id }}
+        google_drive_query: ${{ inputs.google_drive_query }}
     - uses: peaceiris/actions-gh-pages@v3
       with:
         destination_dir: ${{ inputs.github_directory }}
