@@ -18,6 +18,9 @@ inputs:
   google_drive_query:
     description: An optional where clause to filter the files from Google drive.
     required: false
+  recursive:
+    description: Get files recursively and keep folder structure
+    required: false
 runs:
   using: composite
   steps:
@@ -25,6 +28,7 @@ runs:
       with:
         google_drive_folder_id: ${{ inputs.google_drive_folder_id }}
         google_drive_query: ${{ inputs.google_drive_query }}
+        recursive: ${{ inputs.recursive }}
     - uses: peaceiris/actions-gh-pages@v3
       with:
         destination_dir: ${{ inputs.github_directory }}
